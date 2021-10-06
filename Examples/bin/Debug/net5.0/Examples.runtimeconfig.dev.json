@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\morga\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\morga\\.nuget\\packages"
+    ]
+  }
+}

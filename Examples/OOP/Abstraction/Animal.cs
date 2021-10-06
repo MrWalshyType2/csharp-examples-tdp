@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Examples.OOP.Abstraction
+{
+    // abstract classes cannot be instantiated
+    // - i.e. Animal a = new Animal(); is not allowed
+    abstract class Animal : IWalk
+    {
+        // only non-private members of a class are inherited
+        private string s; // not inherited
+
+        protected string Name { get; set; } // inherited
+        public int Age { get; set; } // inherited
+
+        // constructors are not inherited
+        public Animal()
+        {
+            Console.WriteLine("Not inherited");
+        }
+
+        // methods
+        public void SomeBehaviour() // inherited
+        {
+            Console.WriteLine("Some behaviour");
+        }
+
+        // methods marked virtual can be overridden in child classes
+        public virtual void OverridableMethod()
+        {
+            Console.WriteLine("I can be overridden in a derived type");
+        }
+
+        // The interface member is implemented abstractly
+        // - this must be done to indicate Animal is not providing an implementation to IWalk.Walk() and that a 
+        //   derived type will handle it instead.
+        public abstract void Walk();
+    }
+}
