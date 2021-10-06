@@ -32,7 +32,10 @@ namespace Examples.ConsoleAppExample.Services
 
         internal void Delete(int id)
         {
-            itemRepository.Delete(id);
+            if (itemRepository.Exists(id))
+            {
+                itemRepository.Delete(id);
+            }
         }
     }
 }

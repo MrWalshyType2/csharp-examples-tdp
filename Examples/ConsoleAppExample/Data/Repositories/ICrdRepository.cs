@@ -14,5 +14,6 @@ namespace Examples.ConsoleAppExample.Data.Repositories
         public IList<T> Read();
         //T ReadyById(U u);
         public void Delete(U u);
+        bool Exists(U u);
     }
 }
