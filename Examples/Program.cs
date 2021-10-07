@@ -7,6 +7,9 @@ using MySql.Data.MySqlClient;
 using System;
 using System.IO;
 using System.Reflection;
+using Examples.Extensions;
+using Examples.ConsoleAppExample.Data.Repositories;
+using Examples.ConsoleAppExample.Data.Model;
 
 namespace Examples
 {
@@ -20,22 +23,32 @@ namespace Examples
 
         static void Main(string[] args)
         {
-            ItemMenu menu = new ItemMenu(
+            // using statements expand to a try-finally statement that auto disposes
+            // of types that implement IDisposable
+            /*try
+            {
+                using MySqlConnection connection = MySqlUtils.GetConnection();
+
+                ItemMenu menu = new ItemMenu(
                 new ItemController(
                     new ItemService(
-                        new ItemRepository(MySqlUtils.GetConnection()))));
-            menu.InteractiveLoop();
+                        new ItemRepository(connection))));
+                menu.InteractiveLoop();
+            }
+            catch (MySqlException e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
 
+                Console.WriteLine("Cannot connect to server.");
+            }
 
-            //MySqlConnection connection = MySqlUtils.GetConnection();
+            Console.ReadKey();*/
 
-            // opens the connection with the db
-            //connection.Open();
-
-            //MySqlUtils.RunSchema(Environment.CurrentDirectory + @"\static\schema.sql", connection);
-
-            // closes the connection with the db
-            //connection.Close();
+            string s = "Hello world";
+            s.Write(); // this extension method is only scope when the namespace is imported
+            ICrdRepository<Item, int> repo = new ItemRepository(MySqlUtils.GetConnection());
+            repo.ReadById(32);
         }
+
     }
 }

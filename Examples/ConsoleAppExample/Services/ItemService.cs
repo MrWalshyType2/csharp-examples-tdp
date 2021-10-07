@@ -1,5 +1,6 @@
 ﻿using Examples.ConsoleAppExample.Data.Model;
 using Examples.ConsoleAppExample.Data.Repositories;
+using Examples.ConsoleAppExample.Exceptions;
 using Examples.ConsoleAppExample.Repositories;
 using System;
 using System.Collections.Generic;
@@ -32,10 +33,11 @@ namespace Examples.ConsoleAppExample.Services
 
         internal void Delete(int id)
         {
-            if (itemRepository.Exists(id))
+            if (!itemRepository.Exists(id))
             {
-                itemRepository.Delete(id);
+                throw new ItemNotFoundException($"Item with id {id} does not exist");
             }
+            itemRepository.Delete(id);
         }
     }
 }

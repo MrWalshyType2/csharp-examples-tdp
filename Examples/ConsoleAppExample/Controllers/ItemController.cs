@@ -1,4 +1,5 @@
 ﻿using Examples.ConsoleAppExample.Data.Model;
+using Examples.ConsoleAppExample.Exceptions;
 using Examples.ConsoleAppExample.Services;
 using System;
 using System.Collections.Generic;
@@ -28,8 +29,7 @@ namespace Examples.ConsoleAppExample.Controllers
 
             Item newItem = itemService.Create(toCreate);
             Console.WriteLine($"New item created: {newItem}");
-            Console.WriteLine("Press any key to continue");
-            Console.ReadKey();
+
         }
 
         internal void Read()
@@ -41,8 +41,6 @@ namespace Examples.ConsoleAppExample.Controllers
                 Console.WriteLine(item);
             }
 
-            Console.WriteLine("Press any key to continue");
-            Console.ReadKey();
         }
 
         internal void Delete()
@@ -54,7 +52,15 @@ namespace Examples.ConsoleAppExample.Controllers
 
             if (b)
             {
-                itemService.Delete(id); 
+                try
+                {
+                    itemService.Delete(id);
+                }
+                catch (ItemNotFoundException e)
+                {
+                    //Console.WriteLine(e.Message);
+                    Console.WriteLine($"Item with the ID of {id} does not exist");
+                }
             }
         }
     }

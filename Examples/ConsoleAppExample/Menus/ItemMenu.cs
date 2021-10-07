@@ -71,6 +71,8 @@ namespace Examples.ConsoleAppExample.Menus
                         inMenu = false;
                         break;
                 }
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
         }
     }
